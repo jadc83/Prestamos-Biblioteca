@@ -21,4 +21,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('ejemplares', EjemplarController::class);
 });
 
+Route::get('/ejemplares/{ejemplar}', [EjemplarController::class, 'show'])->name('ejemplares.show');
+
 require __DIR__.'/auth.php';

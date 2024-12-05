@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEjemplarRequest;
 use App\Http\Requests\UpdateEjemplarRequest;
 use App\Models\Ejemplar;
+use App\Models\Socio;
 
 class EjemplarController extends Controller
 {
@@ -13,7 +14,8 @@ class EjemplarController extends Controller
      */
     public function index()
     {
-        //
+        $ejemplares = Ejemplar::with('libro')->get();
+        return view('ejemplares.index', ['ejemplares' => $ejemplares]);
     }
 
     /**
@@ -35,11 +37,12 @@ class EjemplarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Ejemplar $ejemplar)
+    public function show($id)
     {
-        //
-    }
+        $ejemplar = Ejemplar::with(['libro', 'prestamos'])->findOrFail($id);
 
+        return view('ejemplares.show', ['ejemplar' => $ejemplar]);
+    }
     /**
      * Show the form for editing the specified resource.
      */
