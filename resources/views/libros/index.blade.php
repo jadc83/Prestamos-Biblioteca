@@ -12,11 +12,7 @@
                             @foreach ($libro->ejemplares as $ejemplar)
                                 <li class="bg-gray-50 p-4 rounded-lg shadow-sm">
                                     <p class="text-sm text-gray-600">ISBN: {{ $ejemplar->libro->isbn }}</p>
-                                </li>
-                                <li>
-                                    @foreach ($ejemplar->prestamos() as $prestamo)
-                                        {{dump($prestamo)}}
-                                    @endforeach
+                                    <p class="text-sm text-gray-600">{{ $ejemplar->libro->titulo }}</p>
                                 </li>
                             @endforeach
                         </ul>
@@ -25,4 +21,5 @@
             @endforeach
         </ul>
     </div>
+    <a href="{{route('libros.create')}}">Crear libro</a>
 </x-app-layout>

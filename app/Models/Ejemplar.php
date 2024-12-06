@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ejemplar extends Model
 {
     protected $table = 'ejemplares';
+    protected $fillable = ['libro_id'];
 
     public function libro(){
         return $this->belongsTo(Libro::class);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreLibroRequest;
 use App\Http\Requests\UpdateLibroRequest;
 use App\Models\Libro;
+use Illuminate\Http\Request;
 
 class LibroController extends Controller
 {
@@ -23,15 +24,36 @@ class LibroController extends Controller
      */
     public function create()
     {
-        //
+        return view('libros.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreLibroRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'titulo' => 'required|string|max:255',
+            'isbn' => 'required|string|max:30',
+            'autor' => 'required|string|max:50',
+            'paginas' => 'required|integer|max:9999',
+            'publicacion' => 'required|date',
+        ], [
+            'titulo.required' => 'El titulo es obligatorio.',
+            'titulo.max' => 'El titulo no puede tener más de 255 caracteres.',
+            'isbn.required' => 'El isbn es obligatorio.',
+            'isbn.max' => 'El isbn no puede tener más de 30 caracteres.',
+            'autor.required' => 'El autor es obligatorio.',
+            'autor.max' => 'El nombre del autor no puede tener más de 255 caracteres.',
+            'paginas.required' => 'El paginas es obligatorio.',
+            'paginas.integer' => 'El paginas debe ser un número entero válido.',
+            'fabricante_id.required' => 'El fabricante es obligatorio.',
+            'fabricante_id.date' => 'La fecha no coincide.',
+        ]);
+
+        $libro = Libro::create($validated);
+        $libro->save();
+        return redirect()->route('libros.index');
     }
 
     /**

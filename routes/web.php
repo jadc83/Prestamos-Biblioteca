@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EjemplarController;
 use App\Http\Controllers\LibroController;
+use App\Http\Controllers\PrestamoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('libros', LibroController::class);
     Route::resource('ejemplares', EjemplarController::class);
+    Route::resource('prestamos', PrestamoController::class);
 });
 
 Route::get('/ejemplares/{ejemplar}', [EjemplarController::class, 'show'])->name('ejemplares.show');
