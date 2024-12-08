@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('libros', LibroController::class);
     Route::resource('ejemplares', EjemplarController::class);
     Route::resource('prestamos', PrestamoController::class);
+    Route::post('/prestamos/{prestamo}/devolver', [PrestamoController::class, 'devolver'])->name('prestamos.devolver');
 });
 
 Route::get('/ejemplares/{ejemplar}', [EjemplarController::class, 'show'])->name('ejemplares.show');

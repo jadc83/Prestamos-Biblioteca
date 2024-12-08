@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('prestamo_id')->constrained();
             $table->primary(['ejemplar_id', 'prestamo_id']);
             $table->timestamps();
+            $table->unique('created_at');
         });
     }
 

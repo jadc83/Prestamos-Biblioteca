@@ -37,14 +37,19 @@ class EjemplarController extends Controller
 
         $validated = $request->validate([
             'libro_id' => 'required|exists:libros,id',
+            'isbn' => 'required|unique:ejemplares,id|string|max:30',
         ], [
             'libro_id.required' => 'El libro es obligatorio.',
             'libro_id.exists' => 'El libro seleccionado no existe.',
+            'isbn.required' => 'El isbn es obligatorio.',
+            'isbn.unique' => 'ISBN ya en uso.',
+            'isbn.max' => 'El isbn no puede tener más de 30 caracteres.',
         ]);
 
-        Ejemplar::create([
-            'libro_id' => $validated['libro_id'],
-        ]);
+        $ejemplar = new Ejemplar();
+        $ejemplar->libro_id = $validated['libro_id'];
+        $ejemplar->isbn = $validated['isbn'];
+        $ejemplar->save();
 
         return redirect()->route('ejemplares.index');
     }

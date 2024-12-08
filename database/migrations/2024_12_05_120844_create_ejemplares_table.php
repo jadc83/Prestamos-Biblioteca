@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('ejemplares', function (Blueprint $table) {
             $table->id();
+            $table->string('isbn', 12)->unique();
             $table->foreignId('libro_id')->constrained();
             $table->timestamps();
         });

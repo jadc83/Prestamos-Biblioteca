@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Prestamo extends Model
 {
+
     public function socio(){
         return $this->belongsTo(Socio::class);
     }

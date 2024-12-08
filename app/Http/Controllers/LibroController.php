@@ -34,15 +34,12 @@ class LibroController extends Controller
     {
         $validated = $request->validate([
             'titulo' => 'required|string|max:255',
-            'isbn' => 'required|string|max:30',
             'autor' => 'required|string|max:50',
             'paginas' => 'required|integer|max:9999',
             'publicacion' => 'required|date',
         ], [
             'titulo.required' => 'El titulo es obligatorio.',
             'titulo.max' => 'El titulo no puede tener más de 255 caracteres.',
-            'isbn.required' => 'El isbn es obligatorio.',
-            'isbn.max' => 'El isbn no puede tener más de 30 caracteres.',
             'autor.required' => 'El autor es obligatorio.',
             'autor.max' => 'El nombre del autor no puede tener más de 255 caracteres.',
             'paginas.required' => 'El paginas es obligatorio.',

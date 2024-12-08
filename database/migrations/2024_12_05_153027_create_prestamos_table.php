@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('socio_id')->constrained();
             $table->date('inicio_prestamo');
             $table->date('fin_prestamo');
-            $table->boolean('devuelto');
+            $table->date('devuelto')->nullable();
             $table->timestamps();
         });
     }
