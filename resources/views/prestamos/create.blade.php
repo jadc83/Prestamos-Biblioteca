@@ -4,10 +4,9 @@
         {{ session('success') }}
     </div>
 @endif
-        <div class="p-6 bg-gray-200 h-full shadow-md rounded-lg flex">
+        <div class="p-6 bg-gray-200 h-full shadow-md rounded-lg flex-col">
             @foreach ($top as $puesto)
-            {{$puesto->id}}
-                {{$puesto->prestamos_count}}
+            {{$puesto->prestamos_count}}
             @endforeach
         </div>
 

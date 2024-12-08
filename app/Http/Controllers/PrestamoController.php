@@ -25,15 +25,14 @@ class PrestamoController extends Controller
     {
 
         $socios = Socio::all();
-        $ejemplares = Ejemplar::with(['prestamos' => function($query) {
-            $query->orderBy('devuelto');
-        }])->get();
+        $ejemplares = Ejemplar::whereDoesntHave('prestamos', function ($query) {
+            $query->whereNull('devuelto');
+        })->with('prestamos')->get();
 
         $top = Ejemplar::withCount('prestamos')
         ->orderBy('prestamos_count', 'desc')
         ->limit(5)
         ->get();
-
 
 
         return view('prestamos.create', ['socios' => $socios, 'ejemplares' => $ejemplares, 'top' => $top]);
